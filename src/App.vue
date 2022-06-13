@@ -7,7 +7,7 @@
     <router-view />
 
     <details>
-      <summary>button组件</summary>
+      <summary>button组件2</summary>
       <div class="demo_item">
         <vg-button>button</vg-button>
         <vg-button color="yellow">button</vg-button>
@@ -76,7 +76,7 @@
           <vg-button color="blue" plan>button</vg-button>
         </vg-button-group>
         <vg-button-group circle size="s">
-          <vg-button color="primary" disabled icon="vg-icon-mail-unread-line">button</vg-button>
+          <vg-button color="primary" icon="vg-icon-mail-unread-line">button</vg-button>
           <vg-button color="blue" plan icon="vg-icon-mail-unread-line">button</vg-button>
         </vg-button-group>
         <vg-button-group circle size="xs">
