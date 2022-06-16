@@ -6,7 +6,7 @@
         <router-link to="/about">关于</router-link>
       </nav>
     </HeaderBar>
-    <router-view class="views" />
+    <router-view class="views scrollBar" />
   </div>
 </template>
 <script>
@@ -40,13 +40,16 @@ export default {
 }
 .views {
   position: absolute;
-  top: 40px;
+  top: 41px;
   left: 0px;
   right: 0px;
   bottom: 0px;
   width: 100%;
   overflow: auto;
   scroll-behavior: smooth;
+  // backdrop-filter: saturate(150%) blur(20px);
+  // -webkit-backdrop-filter: saturate(150%) blur(20px);
+  // background-color: rgba(0, 0, 0, 0.3);
 }
 
 nav {

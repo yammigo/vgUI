@@ -2,7 +2,7 @@
   <div id="header-bar">
     <div class="logo"><i class="vg-icon-vuejs-fill"></i></div>
     <div class="left-action">
-      <vg-button-group>
+      <vg-button-group size="s">
         <vg-button color="primary" title="后退" plan icon="vg-icon-arrow-left-s-line"></vg-button>
         <vg-button color="primary" title="前进" plan icon="vg-icon-arrow-right-s-line"></vg-button>
         <vg-button color="primary" title="刷新" plan icon="vg-icon-restart-line"></vg-button>
@@ -10,14 +10,27 @@
     </div>
     <slot></slot>
     <div class="right-action">
-      <div class="mini"><i class="vg-icon-subtract-line"></i></div>
-      <div class="full"><i class="vg-icon-picture-in-picture-exit-line"></i></div>
-      <div class="close"><i class="vg-icon-close-line"></i></div>
+      <div class="mini" @click="minWindow"><i class="vg-icon-subtract-line"></i></div>
+      <div class="full" @click="maxWindow"><i class="vg-icon-picture-in-picture-exit-line"></i></div>
+      <div class="close" @click="closeWindow"><i class="vg-icon-close-line"></i></div>
     </div>
   </div>
 </template>
 <script>
-export default {}
+export default {
+  name: 'HeaderBar',
+  methods: {
+    maxWindow() {
+      window.ipcRenderer.send('window-max')
+    },
+    minWindow() {
+      window.ipcRenderer.send('window-min')
+    },
+    closeWindow() {
+      window.ipcRenderer.send('window-close')
+    }
+  }
+}
 </script>
 <style lang="less" scoped>
 #header-bar {

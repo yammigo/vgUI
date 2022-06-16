@@ -1,10 +1,34 @@
 @import (less) "../vgui/themes/index.less";
 html,body{
-    background-color:#fff;
+  
+   
     margin:0px;
     padding:0px;
     overflow: hidden;
     position: relative;
     width:100%;
     height:100%;
+    
+}
+body{
+    // background-image:url(https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.jj20.com%2Fup%2Fallimg%2F1114%2F0G020114924%2F200G0114924-15-1200.jpg&refer=http%3A%2F%2Fimg.jj20.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1657943415&t=41655af005876c0a5ded213921ccdf71);
+    // background-size:cover;
+    // background-repeat: no-repeat;
+    
+}
+
+.scrollBar::-webkit-scrollbar {
+    width: 16px;
+    background: transparent;
+  
+}
+.scrollBar:hover::-webkit-scrollbar-thumb {
+    background-color:rgb(216, 216, 216);
+}
+
+.scrollBar::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    border: 4px solid transparent;
+    background-clip: content-box;
+    background-color: transparent;
 }

@@ -4,7 +4,12 @@ module.exports = {
   // chainWebpack: (config) => {
   //     config.resolve.symlinks(true) // 修复热更新失效
   // }
-  devServer:{
-    port:8000
+  pluginOptions: {
+    electronBuilder: {
+      preload: 'src/preload.js'
+    }
+  },
+  devServer: {
+    port: 8000
   }
-};
+}

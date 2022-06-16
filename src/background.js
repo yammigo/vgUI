@@ -1,6 +1,6 @@
 'use strict'
-
-import { app, protocol, BrowserWindow } from 'electron'
+const path = require('path')
+import { app, protocol, BrowserWindow, ipcMain } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 
@@ -11,19 +11,23 @@ const isDevelopment = process.env.NODE_ENV !== 'production'
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([{ scheme: 'app', privileges: { secure: true, standard: true } }])
 
+let mainWindow
+
 async function createWindow() {
   // Create the browser window.
-  const win = new BrowserWindow({
+  const win = (mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     frame: false,
+    // transparent: true,
     webPreferences: {
       // Use pluginOptions.nodeIntegration, leave this alone
       // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
       nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
-      contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION
+      contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION,
+      preload: path.join(__dirname, 'preload.js')
     }
-  })
+  }))
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
@@ -80,3 +84,29 @@ if (isDevelopment) {
     })
   }
 }
+
+/**
+ * 窗口控制
+ * */
+// 1. 窗口 最小化
+ipcMain.on('window-min', function () {
+  // 收到渲染进程的窗口最小化操作的通知，并调用窗口最小化函数，执行该操作
+  mainWindow.minimize()
+})
+
+// 2. 窗口 最大化、恢复
+ipcMain.on('window-max', function () {
+  if (mainWindow.isMaximized()) {
+    // 为true表示窗口已最大化
+    mainWindow.restore() // 将窗口恢复为之前的状态.
+  } else {
+    mainWindow.maximize()
+  }
+})
+
+// 3. 关闭窗口
+ipcMain.on('window-close', function () {
+  // mainWindow.close();
+  mainWindow.setSkipTaskbar(true) // 使窗口不显示在任务栏中
+  mainWindow.hide() // 隐藏窗口
+})
