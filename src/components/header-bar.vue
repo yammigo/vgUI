@@ -21,6 +21,7 @@ export default {
   name: 'HeaderBar',
   methods: {
     maxWindow() {
+      /**最大化窗口 */
       window.ipcRenderer.send('window-max')
     },
     minWindow() {
